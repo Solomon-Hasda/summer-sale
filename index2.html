@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,10 +12,135 @@
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 </head>
+
 <body>
-    <label class="input-group">
-        <input type="text" placeholder="" class="input input-bordered input-sm border-gray-600  " />
-        <button class=" btn btn-primarybg-gray-700 px-3 text-white disabled:opacity-75">Apply</button>
-    </label>
+    <div>
+        <h2 class="text-[#111] font-semibold text-4xl py-5">Kitchenware</h2>
+
+        <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-4 ">
+            <!-- card -1 -->
+            <div class="card lg:w-72 w-96  shadow-2xl" onclick="addToCart(this)">
+                <figure class="px-10 pt-10 py-12 m-4 bg-base-200 rounded-lg">
+                    <img src="images/prod1.png" alt="Shoes" />
+                </figure>
+                <div class="card-body items-center text-center">
+                    <div class="rating">
+                        <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" checked />
+                        <input type="radio" name="rating-3" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" name="rating-4" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" />
+                    </div>
+                    <h2 id="item-name" class="card-title ">K. Accessories</h2>
+                    <h3 id="item1-price" class="text-[#11111180] font-normal text-2xl">40.00 TK</h3>
+                </div>
+            </div>
+            <!-- card-2 -->
+            <div class="card lg:w-72 w-96  shadow-2xl" onclick="addToCart(this)">
+                <figure class="px-10 pt-10 py-12 m-4 bg-base-200 rounded-lg">
+                    <img src="images/prod2.png" alt="Shoes" />
+                </figure>
+                <div class="card-body items-center text-center">
+                    <div class="rating">
+                        <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" name="rating-7" class="mask mask-star-2 bg-orange-400" checked />
+                        <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" name="rating-9" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" name="rating-10" class="mask mask-star-2 bg-orange-400" />
+                    </div>
+                    <h2 class="card-title ">K. Accessories</h2>
+                    <p class="text-[#11111180] font-normal text-2xl">45.00 TK</p>
+                </div>
+            </div>
+            <!-- card-3 -->
+            <div class="card lg:w-72 w-96  shadow-2xl" onclick="addToCart(this)">
+                <figure class="px-10 pt-10 py-12 m-4 bg-base-200 rounded-lg">
+                    <img src="images/prod3.png" alt="Shoes" />
+                </figure>
+                <div class="card-body items-center text-center">
+                    <div class="rating">
+                        <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" checked />
+                        <input type="radio" name="rating-3" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" name="rating-4" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" />
+                    </div>
+                    <h2 class="card-title ">Home Cooker</h2>
+                    <p class="text-[#11111180] font-normal text-2xl">49.00 TK</p>
+                </div>
+            </div>
+            <!-- cart -->
+            <div class="card lg:w-72 w-96  shadow-2xl p-8 space-y-3">
+                <h2 class="text-2xl font-medium text-[#111] mb-5">Have A Coupon?</h2>
+                <input id="coupon-field" type="text" placeholder="Coupon code" class="input input-bordered input-md">
+                <button onclick="setDiscount()" id="coupon-apply" class="btn mt-4 bg-[#E527B2] hover:bg-sky-600"
+                    disabled>Apply</button>
+                <ul id="items">
+
+                </ul>
+                <hr>
+                <h3>Total Price : <span id="total-price">00</span> </h3>
+                <h3>Discount : <span id="discount">00</span> </h3>
+                <h3>Total : <span id="all-Total">00</span> </h3>
+                <hr>
+                <button id="purchase-button" onclick="purchase_modal.showModal()"
+                    class="btn mt-4 bg-[#E527B2] hover:bg-sky-600 text-white">Make
+                    Purchase</button>
+
+            </div>
+        </div>
+    </div>
+
+    <span id="text-to-copy" onclick="copyToClipboard(this)">Click to copy this text.</span>
+    <p id="copy-message" style="display: none;">Text copied</p>
+
+
+    <div>
+
+        <!-- Open the modal using ID.showModal() method -->
+        <button class="btn" onclick="hidi2.showModal()">Make Purchase</button>
+        <dialog id="hidi2" class="modal modal-bottom sm:modal-middle">
+            <form method="dialog" class="modal-box text-center">
+                <h3 class="font-bold text-lg">Hello!</h3>
+                <p class="py-4">Press ESC key or click the button below to close</p>
+                <div class="modal-action flex justify-center">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn">Go Home</button>
+                </div>
+            </form>
+        </dialog>
+    </div>
+    <script src="script/file.js"></script>
+    <script src="common.js"></script>
+
+
+
+
+    <script>
+        function copyToClipboard(element) {
+            const textToCopy = element.innerText;
+
+            // Create a temporary input element
+            const tempInput = document.createElement("input");
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+
+            // Select and copy the text
+            tempInput.select();
+            document.execCommand("copy");
+
+            // Remove the temporary input element
+            document.body.removeChild(tempInput);
+
+            // Display copy message and hide it after a few seconds
+            const copyMessage = document.getElementById("copy-message");
+            copyMessage.style.display = "block";
+            setTimeout(() => {
+                copyMessage.style.display = "none";
+            }, 2000); // Hide after 2 seconds
+        }
+    </script>
+
 </body>
+
 </html>

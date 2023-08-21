@@ -20,7 +20,7 @@
             <div class="grid lg:grid-cols-2 grid-cols-1 text-center justify-center items-center">
                 <div class="space-y-10">
                     <p class="text-[#111] text-3xl uppercase font-medium">--sale fever--</p>
-                    <h2 class="text-6xl font-bold text-[#111]">
+                    <h2 class="lg:text-6xl text-3xl font-bold text-[#111]">
                         Purchase TK 200 or <br> above & get <span class="text-[#E527B2]">20% off</span>
                     </h2>
                     <div class="flex align-middle justify-center items-center">
@@ -43,7 +43,7 @@
 
                 <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-4 " >
                     <!-- card -1 -->
-                    <div class="card lg:w-72 w-96  shadow-2xl" onclick="handleClick(this)">
+                    <div class="card lg:w-72 w-96  shadow-2xl" onclick="addToCart(this)">
                         <figure class="px-10 pt-10 py-12 m-4 bg-base-200 rounded-lg">
                             <img src="images/prod1.png" alt="Shoes" />
                         </figure>
@@ -55,12 +55,12 @@
                                 <input type="radio" name="rating-4" class="mask mask-star-2 bg-orange-400" />
                                 <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" />
                             </div>
-                            <h2 class="card-title ">K. Accessories</h2>
-                            <p class="text-[#11111180] font-normal text-2xl">40.00 TK</p>
+                            <h2 id="item-name" class="card-title ">K. Accessories</h2>                        
+                            <h3 id="item1-price" class="text-[#11111180] font-normal text-2xl">40.00 TK</h3>                     
                         </div>
                     </div>
                     <!-- card-2 -->
-                    <div class="card lg:w-72 w-96  shadow-2xl">
+                    <div class="card lg:w-72 w-96  shadow-2xl" onclick="addToCart(this)">
                         <figure class="px-10 pt-10 py-12 m-4 bg-base-200 rounded-lg">
                             <img src="images/prod2.png" alt="Shoes" />
                         </figure>
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <!-- card-3 -->
-                    <div class="card lg:w-72 w-96  shadow-2xl">
+                    <div class="card lg:w-72 w-96  shadow-2xl" onclick="addToCart(this)">
                         <figure class="px-10 pt-10 py-12 m-4 bg-base-200 rounded-lg">
                             <img src="images/prod3.png" alt="Shoes" />
                         </figure>
@@ -97,16 +97,16 @@
                     <div class="card lg:w-72 w-96  shadow-2xl p-8 space-y-3">
                       <h2 class="text-2xl font-medium text-[#111] mb-5">Have A Coupon?</h2>
                         <input id="coupon-field" type="text" placeholder="Coupon code" class="input input-bordered input-md">
-                        <button id="coupon-apply" class="btn mt-4 bg-[#E527B2] hover:bg-sky-600" disabled>Apply</button>
+                        <button onclick="setDiscount()" id="coupon-apply" class="btn mt-4 bg-[#E527B2] hover:bg-sky-600" disabled>Apply</button>
                         <ul id="items">
                             
                         </ul>
                         <hr>
-                        <h3>Total Price : </h3>
-                        <h3>Discount : </h3>
-                        <h3>Total : </h3>
+                        <h3>Total Price : <span id="total-price">00</span> </h3>
+                        <h3>Discount : <span id="discount">00</span> </h3>
+                        <h3>Total : <span id="all-Total">00</span> </h3>
                         <hr>
-                        <button class="btn mt-4 bg-[#E527B2] hover:bg-sky-600 text-white" disabled >Make Purchase</button>
+                        <button id="purchase-button" onclick="purchase_button.showModal()" class="btn mt-4 bg-[#E527B2] hover:bg-sky-600 text-white" disabled >Make Purchase</button>
                     </div>
                 </div>
             </div>
@@ -121,7 +121,7 @@
 
             <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-4">
                 <!-- card -1 -->
-                <div class="card lg:w-72 w-96  shadow-2xl">
+                <div class="card lg:w-72 w-96  shadow-2xl" onclick="addToCart(this)">
                     <figure class="px-10 pt-10 py-12 m-4 bg-base-200 rounded-lg">
                         <img src="images/prod4.png" alt="Shoes" />
                     </figure>
@@ -138,7 +138,7 @@
                     </div>
                 </div>
                 <!-- card-2 -->
-                <div class="card lg:w-72 w-96  shadow-2xl">
+                <div class="card lg:w-72 w-96  shadow-2xl" onclick="addToCart(this)">
                     <figure class="px-10 pt-10 py-12 m-4 bg-base-200 rounded-lg">
                         <img src="images/prod5.png" alt="Shoes" />
                     </figure>
@@ -155,7 +155,7 @@
                     </div>
                 </div>
                 <!-- card-3 -->
-                <div class="card lg:w-72 w-96  shadow-2xl">
+                <div class="card lg:w-72 w-96  shadow-2xl" onclick="addToCart(this)">
                     <figure class="px-10 pt-10 py-12 m-4 bg-base-200 rounded-lg">
                         <img src="images/prod6.png" alt="Shoes" />
                     </figure>
@@ -174,10 +174,23 @@
             </div>
 
         </section>
+        <dialog id="purchase_button" class="modal">
+            <form method="dialog" class="modal-box w-1/2 max-w-5xl text-center">
+                <div class="flex justify-center">
+                    <img src="images/congo.png" alt="">
+                </div>
+                <h3 class="font-bold text-5xl text-[#111] ">Congratulations!</h3>
+                <p class="py-4 text-xl font-normal text-[11111180]">Your Purchase the product</p>
+                <div class="modal-action flex items-center justify-center">
+                    <button id="go_home" class="btn bg-[#E527B2] hover:bg-sky-600 text-white">Go Home</button>
+                </div>
+            </form>
+        </dialog>
     </main>
 
 
     <script src="script/file.js"></script>
+    <script src="common.js"></script>
 </body>
 
 </html>
